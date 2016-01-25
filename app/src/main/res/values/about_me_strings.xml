@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_me_label">About me</string>
+    <string name="connect">Connect with me</string>
+    <string name="linkedin_icon">fa-linkedin-square</string>
+    <string name="linkedin">LinkedIn</string>
+    <string name="github">GitHub</string>
+
+    <string name="about_me_summary">Hey there, I\'m Aravind!
+        I build Android apps for fun during my spare time! If you have any feedback, questions, or suggestions regarding
+        this app, please feel free to contact me. If you would like me to make any changes or have any features you would
+        like me to add, please do let me know. I hope this app is useful for you and has given you a bug-free experience.
+    </string>
+</resources>

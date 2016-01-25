@@ -1,0 +1,18 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add_new_call"
+        android:orderInCategory="100"
+        android:title="Schedule Call"
+        android:icon="@drawable/add"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/settings"
+        android:orderInCategory="200"
+        android:title="@string/settings"
+        android:icon="@drawable/gear39"
+        app:showAsAction="ifRoom"/>
+</menu>

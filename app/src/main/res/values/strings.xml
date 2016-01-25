@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Auto Dialer</string>
+    <string name="action_settings">Settings</string>
+    <string name="about">About</string>
+
+    <string name="details_call_name">Call Name (Optional)</string>
+	<string name="details_repeat_weekly">Make Call Every Week</string>
+	<string name="details_sunday">Sunday</string>
+	<string name="details_monday">Monday</string>
+	<string name="details_tuesday">Tuesday</string>
+	<string name="details_wednesday">Wednesday</string>
+	<string name="details_thursday">Thursday</string>
+	<string name="details_friday">Friday</string>
+	<string name="details_saturday">Saturday</string>
+	<string name="details_call_tone">Reminder Tone</string>
+	<string name="details_call_tone_default">Choose a tone that should go off as a reminder 15 seconds prior to the start of the call</string>
+    <string name="title_activity_activity_set_calls">Add New Call</string>
+
+    <string name="hello_world"> ➔ This application allows you to set automatic outgoing calls on a specified time and day of the week. You can also use this app to schedule conference calls.
+		Here is a sample format: 18005555555,55555#,55555, where 18005555555 is the conference number, 55555# is the meeting id followed by hash (if required after dialing your pin), and
+		55555 is the password. In other words separate any pins required with a comma (",").
+
+	</string>
+    <string name="no_name">Unnamed Call</string>
+    <string name="hello_world2">
+		 ➔ Once the call initiates, you have the number of seconds specified in settings to cancel the call or start it. If you do not do anything, the call will automatically dial when the timer hits 0.
+	</string>
+
+	<string name="hello_world3">
+		 ➔ The On and Off button can be used to turn on and off a call. The call now button allows you to dial the number.  <now class=""></now>
+	</string>
+    <string name="hello_world4">Disclaimer: This app cannot dial 911!</string>
+	<string name="title_activity_about">About</string>
+
+	<string name="save_call">Save Call</string>
+
+    <!-- Menu icons -->
+    <string name="settings">Settings</string>
+
+    <string name="confirm_delete_title">Delete call</string>
+    <string name="confirm_delete_message">Would you like to delete this call?</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+</resources>
