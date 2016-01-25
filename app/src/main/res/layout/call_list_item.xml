@@ -97,8 +97,7 @@
 			android:text="⟳"
 			android:textAppearance="?android:attr/textAppearanceSmall" />
 
-		<com.rey.material.widget.ToggleButton
-			xmlns:app="http://schemas.android.com/apk/res-auto"
+		<ToggleButton
 	        android:id="@+id/call_item_toggle"
 	        android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -106,12 +105,7 @@
 			android:layout_above="@+id/call_item_name"
 			android:layout_alignParentRight="true"
 			android:layout_alignParentEnd="true"
-			app:rd_rippleType="touch"
-			app:rd_backgroundAnimDuration="0"
-			app:rd_backgroundColor="@android:color/transparent"
-			app:rd_maxRippleRadius="match_view"
-			app:rd_rippleAnimDuration="150"
-			app:rd_enable="true"/>/>
+			/>
 
 		<TextView
 			android:id="@+id/number"
@@ -133,8 +127,7 @@
 			android:layout_alignParentLeft="true"
 			android:layout_alignParentStart="true" />
 
-		<com.rey.material.widget.Button
-			xmlns:app="http://schemas.android.com/apk/res-auto"
+		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Call Now ✆"
@@ -142,14 +135,8 @@
 			android:textAllCaps="false"
 			android:textSize="12dp"
 			android:id="@+id/button"
-			android:layout_above="@+id/call_item_name"
-			android:layout_centerHorizontal="true"
-			app:rd_rippleType="touch"
-			app:rd_backgroundAnimDuration="0"
-			app:rd_backgroundColor="@android:color/transparent"
-			app:rd_maxRippleRadius="match_view"
-			app:rd_rippleAnimDuration="150"
-			app:rd_enable="true"/>
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
 	</RelativeLayout>
 
