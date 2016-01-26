@@ -20,7 +20,7 @@
 
     <string name="hello_world"> ➔ This application allows you to set automatic outgoing calls on a specified time and day of the week. You can also use this app to schedule conference calls.
 		Here is a sample format: 18005555555,55555#,55555, where 18005555555 is the conference number, 55555# is the meeting id followed by hash (if required after dialing your pin), and
-		55555 is the password. In other words separate any pins required with a comma (",").
+		55555 is the password. In other words separate any pins required with a comma (","). Lastly, you can set the time limit of the call. The timer starts when the call starts ringing.
 
 	</string>
     <string name="no_name">Unnamed Call</string>
@@ -33,6 +33,7 @@
 	</string>
     <string name="hello_world4">Disclaimer: This app cannot dial 911!</string>
 	<string name="title_activity_about">About</string>
+	<string name="title_activity_help">Help</string>
 
 	<string name="save_call">Save Call</string>
 

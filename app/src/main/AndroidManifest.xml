@@ -58,7 +58,7 @@
 
         <activity
             android:name=".Activities.AboutActivity"
-            android:label="@string/title_activity_about" >
+            android:label="@string/title_activity_help" >
         </activity>
         <activity
             android:name=".Activities.SettingsActivity"

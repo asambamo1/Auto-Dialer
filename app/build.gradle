@@ -5,11 +5,11 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.smartlifedigital.autodialer2"
+        applicationId "com.smartlifedigital.autodialer"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 11
-        versionName "3.0"
+        versionCode 13
+        versionName "3.0.1"
     }
 
     buildTypes {

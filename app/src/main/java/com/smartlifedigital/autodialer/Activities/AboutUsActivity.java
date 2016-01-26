@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 
 public class AboutUsActivity extends AppCompatActivity{
-    public static final String SUPPORT_EMAIL = "aravind.arasam@gmail.com";
+    public static final String SUPPORT_EMAIL = "support@smartlifedigital.com";
     public static final String Web_URL = "http://www.smartlifedigital.com/auto_dialer";
 
     @Bind(R.id.coordinator_layout) CoordinatorLayout parent;
