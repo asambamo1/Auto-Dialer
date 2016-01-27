@@ -41,9 +41,6 @@ public class AboutUsActivity extends AppCompatActivity{
 
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        android.support.v7.app.ActionBar bar = getSupportActionBar();
-        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#263238")));
-
         settingsOptions.setAdapter(new SettingsAdapter(this));
     }
 

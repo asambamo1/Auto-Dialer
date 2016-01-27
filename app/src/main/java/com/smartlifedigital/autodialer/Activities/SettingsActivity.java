@@ -34,7 +34,10 @@ public class SettingsActivity extends PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         ActionBar bar = getActionBar();
         bar.setDisplayHomeAsUpEnabled(true);
-        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#263238")));
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#37474F")));
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(Color.parseColor("#263238"));
+        }
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         addPreferencesFromResource(R.xml.prefs);

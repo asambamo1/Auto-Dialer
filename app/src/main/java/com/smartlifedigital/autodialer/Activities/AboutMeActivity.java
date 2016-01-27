@@ -25,8 +25,7 @@ public class AboutMeActivity extends AppCompatActivity {
         setContentView(R.layout.about_me);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        android.support.v7.app.ActionBar bar = getSupportActionBar();
-        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#263238")));
+
     }
 
     @OnClick(R.id.linkedin)

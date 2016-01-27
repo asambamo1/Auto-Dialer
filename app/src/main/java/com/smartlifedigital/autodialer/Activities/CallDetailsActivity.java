@@ -63,10 +63,7 @@ public class CallDetailsActivity extends AppCompatActivity {
 
 		getSupportActionBar().setTitle("Schedule a Call");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		android.support.v7.app.ActionBar bar = getSupportActionBar();
-		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#263238")));
-
-        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         StringBuilder builder = new StringBuilder();
         builder.append(SP.getBoolean("time", true));
 

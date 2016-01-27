@@ -37,11 +37,6 @@ public class CallListActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-        android.support.v7.app.ActionBar bar = getSupportActionBar();
-        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#263238")));
-
-
         mContext = this;
 		setContentView(R.layout.activity_call_list);
         ButterKnife.bind(this);
@@ -64,7 +59,7 @@ public class CallListActivity extends AppCompatActivity {
         super.onRestart();
         finish();
         startActivity(getIntent());
-    }
+}
 
 	public static class MyObject implements Comparable<MyObject> {
 

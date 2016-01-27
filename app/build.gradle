@@ -8,8 +8,8 @@ android {
         applicationId "com.smartlifedigital.autodialer"
         minSdkVersion 14
         targetSdkVersion 22
-        versionCode 16
-        versionName "3.0.3"
+        versionCode 18
+        versionName "3.1"
     }
 
     buildTypes {

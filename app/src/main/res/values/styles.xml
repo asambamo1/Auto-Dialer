@@ -3,10 +3,14 @@
 
     <style name="App" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">#37474F</item>
+        <item name="colorPrimaryDark">#263238</item>
     </style>
 
     <style name="App1" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">#37474F</item>
+        <item name="colorPrimaryDark">#263238</item>
     </style>
     <!--
         Base application theme, dependent on API level. This theme is replaced

@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:background="#455A64"
+        android:background="#546E7A"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         tools:context="com.smartlifedigital.autodialer">
