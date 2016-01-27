@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- From: file:/C:/Users/Aravind/Documents/GitHub/Auto%20Dialer/app/build/intermediates/exploded-aar/com.afollestad.material-dialogs/core/0.8.3.0/res/values-sw720dp/values-sw720dp.xml -->
-    <eat-comment/>
-    <bool name="md_is_tablet">true</bool>
-    <!-- From: file:/C:/Users/Aravind/Documents/GitHub/Auto%20Dialer/app/src/main/res/values-sw720dp/dimens.xml -->
-    <eat-comment/>
-    <dimen name="activity_horizontal_margin">64dp</dimen>
-</resources>

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval"
-    >
-    <solid android:color="@color/bthumbnail_placeholder" />
-</shape>
-<!-- From: file:/C:/Users/Jamie/AndroidStudioProjects/Android-Bootstrap/AndroidBootstrap/res/drawable/thumbnail_circle.xml --><!-- From: file:/C:/Users/Aravind/Documents/GitHub/Auto%20Dialer/app/build/intermediates/exploded-aar/com.beardedhen/androidbootstrap/1.2.3/res/drawable/thumbnail_circle.xml -->
