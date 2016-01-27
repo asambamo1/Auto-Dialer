@@ -378,10 +378,12 @@
                 android:textSize="13dp"
                 android:paddingRight="3dp"
                 android:paddingLeft="3dp"
+                android:layout_marginLeft="165dp"
                 android:gravity="center"
                 android:id="@+id/Seconds"
                 android:layout_alignTop="@+id/callTimer"
                 android:layout_centerHorizontal="true"
+                android:layout_alignLeft="@+id/callTimer"
                 android:layout_alignBottom="@+id/callTimer" />
         </RelativeLayout>
     </ScrollView>

@@ -1,12 +1,14 @@
 package com.smartlifedigital.autodialer.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -64,7 +66,15 @@ public class CallDetailsActivity extends AppCompatActivity {
 		android.support.v7.app.ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#263238")));
 
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        StringBuilder builder = new StringBuilder();
+        builder.append(SP.getBoolean("time", true));
+
+
 		timePicker = (TimePicker) findViewById(R.id.call_details_time_picker);
+        if(builder.toString().equals("true")) {
+            timePicker.setIs24HourView(true);
+        }
 
 		long id = getIntent().getExtras().getLong("id");
 		
