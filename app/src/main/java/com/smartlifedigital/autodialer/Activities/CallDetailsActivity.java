@@ -179,7 +179,6 @@ public class CallDetailsActivity extends AppCompatActivity {
         else if (t2.getText().toString().trim().startsWith("911")){
             Snackbar.make(snackbar, "911 calls are not allowed!", Snackbar.LENGTH_LONG).show();
         }
-		//else if (callDetails == callDetails)
         else {
             updateModelFromLayout();
             CallManagerHelper.cancelcalls(this);

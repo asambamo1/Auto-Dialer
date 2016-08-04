@@ -6,7 +6,7 @@
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
     android:paddingTop="5dp"
-    android:background="#546E7A"
+    android:background="#607D8B"
     tools:context=".callListActivity" >
 
     <ListView

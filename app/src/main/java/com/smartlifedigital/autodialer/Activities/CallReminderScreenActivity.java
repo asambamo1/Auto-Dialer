@@ -42,9 +42,9 @@ public class CallReminderScreenActivity extends Activity {
 		StringBuilder builder = new StringBuilder();
 		StringBuilder builder2 = new StringBuilder();
 		builder.append(SP.getBoolean("time", true));
-		builder2.append(SP.getString("callreminder", "0"));
+		builder2.append(SP.getString("callreminder", "15"));
 		String t = builder2.toString();
-        if(t.isEmpty()){
+        if(t.isEmpty()||t==null){
             t = "15";
         }
         else if(t.equals("0")){
