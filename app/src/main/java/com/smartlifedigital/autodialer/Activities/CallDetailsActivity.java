@@ -39,7 +39,7 @@ public class CallDetailsActivity extends AppCompatActivity {
 	private Model callDetails;
 	
 	private TimePicker timePicker;
-	@Bind(R.id.call_details_name) EditText edtName;
+	@Bind(R.id.call_details_name) public EditText edtName;
 	@Bind(R.id.autodial_number) EditText edtNumber;
 	@Bind(R.id.callTimer) EditText edtTimer;
 	@Bind(R.id.call_details_repeat_weekly) Switch chkWeekly;

@@ -3,14 +3,19 @@ package com.smartlifedigital.autodialer.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -21,92 +26,113 @@ import com.smartlifedigital.autodialer.Models.Model;
 import com.smartlifedigital.autodialer.R;
 
 import java.sql.Date;
+import java.text.Normalizer;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnTextChanged;
 
 public class CallListActivity extends AppCompatActivity {
 
-	private CallListAdapter mAdapter;
-	private Context mContext;
-	private Database dbHelper = new Database(this);
-    @Bind(R.id.empty) View noCalls;
-    @Bind(R.id.calls_list) ListView callsList;
+    private CallListAdapter mAdapter;
+    private Context mContext;
+    private Database dbHelper = new Database(this);
+    @Bind(R.id.empty)
+    View noCalls;
+    @Bind(R.id.calls_list)
+    ListView callsList;
+    @Bind(R.id.search)
+    EditText searchBar;
 
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mContext = this;
-		setContentView(R.layout.activity_call_list);
+        setContentView(R.layout.activity_call_list);
         ButterKnife.bind(this);
-		mAdapter = new CallListAdapter(this, dbHelper.getcalls());
+        mAdapter = new CallListAdapter(this, dbHelper.getcalls());
         callsList.setAdapter(mAdapter);
-	}
+        callsList.setTextFilterEnabled(true);
+    }
 
 
     @Override
     protected void onResume() {
         super.onResume();
+        callsList.setAdapter(mAdapter);
         if (mAdapter.getCount() != 0) {
             noCalls.setVisibility(View.GONE);
+            searchBar.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
-    public void onRestart()
-    {
+    public void onRestart() {
         super.onRestart();
         finish();
         startActivity(getIntent());
-}
+    }
 
-	public static class MyObject implements Comparable<MyObject> {
 
-		private Date dateTime;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-		public Date getDateTime() {
-			return dateTime;
-		}
+        if (resultCode == RESULT_OK) {
+            mAdapter.setcalls(dbHelper.getcalls());
+            mAdapter.notifyDataSetChanged();
+        }
+    }
 
-		public void setDateTime(Date datetime) {
-			this.dateTime = datetime;
-		}
+    @OnTextChanged(value = R.id.search, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    public void afterTextChanged(CharSequence s) {
+        mAdapter.getFilter().filter(s);
+        if(searchBar.getText().toString().equals("")) {
+            callsList.setAdapter(mAdapter);
+        }
+    }
 
-		@Override
-		public int compareTo(MyObject o) {
-			return getDateTime().compareTo(o.getDateTime());
-		}
-	}
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		
-		if (resultCode == RESULT_OK) {
-	        mAdapter.setcalls(dbHelper.getcalls());
-	        mAdapter.notifyDataSetChanged();
-	    }
-	}
-	
-	public void setcallEnabled(long id, boolean isEnabled) {
-		CallManagerHelper.cancelcalls(this);
-		
-		Model model = dbHelper.getcall(id);
-		model.isEnabled = isEnabled;
-		dbHelper.updatecall(model);
-		
-		CallManagerHelper.setcalls(this);
-	}
 
-	public void startcallDetailsActivity(long id) {
-		Intent intent = new Intent(this, CallDetailsActivity.class);
-		intent.putExtra("id", id);
-		startActivityForResult(intent, 0);
-	}
-	
-	public void deletecall(long id) {
-		final long callId = id;
+    public static class MyObject implements Comparable<MyObject> {
+
+        private Date dateTime;
+
+        public Date getDateTime() {
+            return dateTime;
+        }
+
+        public void setDateTime(Date datetime) {
+            this.dateTime = datetime;
+        }
+
+        @Override
+        public int compareTo(MyObject o) {
+            return getDateTime().compareTo(o.getDateTime());
+        }
+    }
+
+    public void setcallEnabled(long id, boolean isEnabled) {
+        CallManagerHelper.cancelcalls(this);
+
+        Model model = dbHelper.getcall(id);
+        try {
+            model.isEnabled = isEnabled;
+        } catch (NullPointerException e) {
+            System.out.print("Caught Exception!");
+        }
+        dbHelper.updatecall(model);
+
+        CallManagerHelper.setcalls(this);
+    }
+
+    public void startcallDetailsActivity(long id) {
+        Intent intent = new Intent(this, CallDetailsActivity.class);
+        intent.putExtra("id", id);
+        startActivityForResult(intent, 0);
+    }
+
+    public void deletecall(long id) {
+        final long callId = id;
         new MaterialDialog.Builder(this)
                 .title(R.string.confirm_delete_title)
                 .content(R.string.confirm_delete_message)
@@ -127,14 +153,16 @@ public class CallListActivity extends AppCompatActivity {
                         try {
                             CallManagerHelper.setcalls(mContext);
                         } catch (NullPointerException e) {
+                            System.out.print("Caught Exception!");
                         }
                         if (mAdapter.getCount() == 0) {
                             noCalls.setVisibility(View.VISIBLE);
+                            searchBar.setVisibility(View.GONE);
                         }
                     }
                 })
                 .show();
-	}
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

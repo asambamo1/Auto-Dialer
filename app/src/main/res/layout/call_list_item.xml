@@ -35,8 +35,8 @@
 	        android:layout_below="@+id/call_item_time"
 	        android:layout_marginLeft="4dp"
 	        android:text="M"
-	        android:textAppearance="?android:attr/textAppearanceSmall" /> 
-	        
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 	    <TextView
 	        android:id="@+id/call_item_tuesday"
 	        android:layout_width="wrap_content"
@@ -45,8 +45,8 @@
 	        android:layout_below="@+id/call_item_time"
 	        android:layout_marginLeft="4dp"
 	        android:text="T"
-	        android:textAppearance="?android:attr/textAppearanceSmall" /> 
-	        
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 	    <TextView
 	        android:id="@+id/call_item_wednesday"
 	        android:layout_width="wrap_content"
@@ -55,8 +55,8 @@
 	        android:layout_below="@+id/call_item_time"
 	        android:layout_marginLeft="4dp"
 	        android:text="W"
-	        android:textAppearance="?android:attr/textAppearanceSmall" /> 
-	        
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 	    <TextView
 	        android:id="@+id/call_item_thursday"
 	        android:layout_width="wrap_content"
@@ -65,8 +65,8 @@
 	        android:layout_below="@+id/call_item_time"
 	        android:layout_marginLeft="4dp"
 	        android:text="T"
-	        android:textAppearance="?android:attr/textAppearanceSmall" /> 
-	        
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 	    <TextView
 	        android:id="@+id/call_item_friday"
 	        android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
 	        android:layout_marginLeft="4dp"
 	        android:text="F"
 	        android:textAppearance="?android:attr/textAppearanceSmall" />
-	        
+
 	    <TextView
 	        android:id="@+id/call_item_saturday"
 	        android:layout_width="wrap_content"

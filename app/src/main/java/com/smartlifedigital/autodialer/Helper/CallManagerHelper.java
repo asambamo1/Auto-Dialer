@@ -29,7 +29,7 @@ public class CallManagerHelper extends BroadcastReceiver {
 		try {
 			setcalls(context);
 		}catch (NullPointerException e){
-
+			System.out.print("Caught Exception!");
 		}
 	}
 	
