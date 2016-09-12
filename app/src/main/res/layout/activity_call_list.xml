@@ -13,7 +13,7 @@
         android:id="@+id/calls_list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/search"
+        android:layout_below="@+id/search_badge"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -33,21 +33,51 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint=" ? Search"
-        android:imeOptions="actionDone"
-        android:singleLine="true"
-        android:visibility="gone"
-        android:maxLength="80"
-        android:background="@drawable/edittext_border"
-        android:id="@+id/search"
-        android:textSize="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:id="@+id/search_badge"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:paddingLeft="35dp"
+            android:paddingRight="35dp"
+            android:maxLength="80"
+            android:background="@drawable/edittext_border"
+            android:id="@+id/search"
+            android:textSize="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/clear_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:textSize="22dp"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:layout_gravity="center_vertical|right"
+            android:text="@string/clear_icon"/>
+
+
+        <com.joanzapata.iconify.widget.IconTextView
+            android:id="@+id/search_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:textSize="22dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/search_icon"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:layout_gravity="left|center_vertical"/>
+
+    </FrameLayout>
 
 </RelativeLayout>

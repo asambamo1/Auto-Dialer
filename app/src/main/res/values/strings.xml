@@ -3,7 +3,8 @@
 
     <string name="app_name">Auto Dialer+</string>
     <string name="action_settings">Settings</string>
-    <string name="about">About</string>
+	<string name="about">About</string>
+	<string name="search">Search</string>
 
     <string name="details_call_name">Call Name (Optional)</string>
 	<string name="details_repeat_weekly">Make Call Every Week</string>
@@ -39,6 +40,10 @@
 
     <!-- Menu icons -->
     <string name="settings">Settings</string>
+
+	<!-- Font Awesome icons -->
+	<string name="clear_icon">{fa-remove}</string>
+	<string name="search_icon">{fa-search}</string>
 
     <string name="confirm_delete_title">Delete call</string>
     <string name="confirm_delete_message">Would you like to delete this call?</string>

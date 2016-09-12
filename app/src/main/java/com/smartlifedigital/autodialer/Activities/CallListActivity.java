@@ -14,11 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.smartlifedigital.autodialer.Adapters.CallListAdapter;
 import com.smartlifedigital.autodialer.Helper.CallManagerHelper;
 import com.smartlifedigital.autodialer.Models.Database;
@@ -30,6 +33,7 @@ import java.text.Normalizer;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 public class CallListActivity extends AppCompatActivity {
@@ -42,11 +46,14 @@ public class CallListActivity extends AppCompatActivity {
     @Bind(R.id.calls_list)
     ListView callsList;
     @Bind(R.id.search)
-    EditText searchBar;
+    EditText search;
+    @Bind(R.id.search_badge)
+    FrameLayout searchBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Iconify.with(new FontAwesomeModule());
         mContext = this;
         setContentView(R.layout.activity_call_list);
         ButterKnife.bind(this);
@@ -87,9 +94,11 @@ public class CallListActivity extends AppCompatActivity {
     @OnTextChanged(value = R.id.search, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     public void afterTextChanged(CharSequence s) {
         mAdapter.getFilter().filter(s);
-        if(searchBar.getText().toString().equals("")) {
-            callsList.setAdapter(mAdapter);
-        }
+    }
+
+    @OnClick(R.id.clear_search)
+    public void clearSearch(View view){
+        search.setText("");
     }
 
 
