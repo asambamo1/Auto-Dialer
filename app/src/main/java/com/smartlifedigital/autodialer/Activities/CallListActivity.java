@@ -49,6 +49,8 @@ public class CallListActivity extends AppCompatActivity {
     EditText search;
     @Bind(R.id.search_badge)
     FrameLayout searchBar;
+    @Bind(R.id.clear_search)
+    com.joanzapata.iconify.widget.IconTextView clear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,12 @@ public class CallListActivity extends AppCompatActivity {
     @OnTextChanged(value = R.id.search, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     public void afterTextChanged(CharSequence s) {
         mAdapter.getFilter().filter(s);
+        if ((search.getText().toString().equals(""))){
+            clear.setVisibility(View.GONE);
+        }
+        else{
+            clear.setVisibility(View.VISIBLE);
+        }
     }
 
     @OnClick(R.id.clear_search)
