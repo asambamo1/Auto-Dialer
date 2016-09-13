@@ -88,7 +88,7 @@ public class CallListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            mAdapter.setcalls(dbHelper.getcalls());
+            mAdapter.setCalls(dbHelper.getcalls());
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -163,7 +163,7 @@ public class CallListActivity extends AppCompatActivity {
                         //Delete call from DB by id
                         dbHelper.deletecall(callId);
                         //Refresh the list of the scheduled calls in the adapter
-                        mAdapter.setcalls(dbHelper.getcalls());
+                        mAdapter.setCalls(dbHelper.getcalls());
                         //Notify the adapter the data has changed
                         mAdapter.notifyDataSetChanged();
                         //Schedule the calls

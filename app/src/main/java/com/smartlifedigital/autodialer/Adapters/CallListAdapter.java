@@ -51,7 +51,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
         mCallFilterList = mCalls;
 	}
 
-	public void setcalls(List<Model> calls) {
+	public void setCalls(List<Model> calls) {
 		mCalls = calls;
 	}
 
