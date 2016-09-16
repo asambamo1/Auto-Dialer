@@ -51,6 +51,8 @@ public class CallListActivity extends AppCompatActivity {
     FrameLayout searchBar;
     @Bind(R.id.clear_search)
     com.joanzapata.iconify.widget.IconTextView clear;
+    @Bind(R.id.no_call_found)
+    TextView noCallFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class CallListActivity extends AppCompatActivity {
         super.onResume();
         callsList.setAdapter(mAdapter);
         if (mAdapter.getCount() != 0) {
-            noCalls.setVisibility(View.GONE);
+            noCalls.setVisibility(View.INVISIBLE);
             searchBar.setVisibility(View.VISIBLE);
         }
     }
@@ -96,8 +98,23 @@ public class CallListActivity extends AppCompatActivity {
     @OnTextChanged(value = R.id.search, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     public void afterTextChanged(CharSequence s) {
         mAdapter.getFilter().filter(s);
+
+        if(mAdapter.filterList != null && mAdapter.filterList.isEmpty()){
+            noCallFound.setVisibility(View.VISIBLE);
+            noCallFound.setText("No Calls Found Matching " + "' " + s.toString()  + " '");
+        }
+        if(mAdapter.filterList != null && !(mAdapter.filterList.isEmpty())){
+            noCallFound.setVisibility(View.INVISIBLE);
+        }
+        if(s.toString().isEmpty()){
+            noCallFound.setVisibility(View.INVISIBLE);
+            if(mAdapter.mSearchText != null){
+                mAdapter.mSearchText = "";
+            }
+        }
         if ((search.getText().toString().equals(""))){
             clear.setVisibility(View.GONE);
+            mAdapter.notifyDataSetChanged();
         }
         else{
             clear.setVisibility(View.VISIBLE);

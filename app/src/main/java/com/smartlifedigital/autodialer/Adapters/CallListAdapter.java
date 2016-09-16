@@ -41,8 +41,9 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 
 	private Context mContext;
 	private List<Model> mCalls;
-    private String mSearchText;
+    public String mSearchText;
     List<Model> mCallFilterList;
+	public ArrayList<Model> filterList;
     ValueFilter valueFilter;
 
 	public CallListAdapter(Context context, List<Model> calls) {
@@ -70,7 +71,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 
             if (constraint != null && constraint.length() > 0) {
                 mSearchText = "";
-                ArrayList<Model> filterList = new ArrayList<Model>();
+				filterList = new ArrayList<Model>();
                 for (int i = 0; i < mCallFilterList.size(); i++) {
 
                     Model call = new Model(mCallFilterList.get(i).getId(), mCallFilterList.get(i).getTimeHour(),
@@ -98,12 +99,6 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
                         }
                     }
                 }
-                if(filterList.isEmpty()){
-                    Model call = new Model();
-                    call.setName("No Calls Found Matching " + "'" + constraint.toString() + "'. " + "Click to Schedule New Call");
-                    call.setIsEnabled(false);
-                    filterList.add(call);
-                }
                 results.count = filterList.size();
                 results.values = filterList;
             } else {
@@ -111,7 +106,6 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
                 results.values = mCallFilterList;
             }
             return results;
-
         }
 
         @Override
@@ -268,7 +262,6 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 		});
 
         // HIGHLIGHT...
-
         String fullText = model.name;
 
         if (mSearchText != null && !mSearchText.isEmpty()) {
@@ -309,10 +302,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 
 		return view;
 	}
-
-
-
-
+	
 	private void updateTextColor(TextView view, boolean isOn) {
 		if (isOn) {
 			view.setTextColor(Color.GREEN);
