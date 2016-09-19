@@ -98,7 +98,6 @@ public class CallListActivity extends AppCompatActivity {
     @OnTextChanged(value = R.id.search, callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     public void afterTextChanged(CharSequence s) {
         mAdapter.getFilter().filter(s);
-
         if(mAdapter.filterList != null && mAdapter.filterList.isEmpty()){
             noCallFound.setVisibility(View.VISIBLE);
             noCallFound.setText("No Calls Found Matching " + "' " + s.toString()  + " '");
@@ -111,10 +110,10 @@ public class CallListActivity extends AppCompatActivity {
             if(mAdapter.mSearchText != null){
                 mAdapter.mSearchText = "";
             }
+            mAdapter.notifyDataSetChanged();
         }
         if ((search.getText().toString().equals(""))){
             clear.setVisibility(View.GONE);
-            mAdapter.notifyDataSetChanged();
         }
         else{
             clear.setVisibility(View.VISIBLE);
@@ -186,6 +185,7 @@ public class CallListActivity extends AppCompatActivity {
                         //Schedule the calls
                         try {
                             CallManagerHelper.setcalls(mContext);
+                            refresh();
                         } catch (NullPointerException e) {
                             System.out.print("Caught Exception!");
                         }
@@ -196,6 +196,16 @@ public class CallListActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    public void refresh(){
+        if (!(search.getText().toString().isEmpty())) {
+            search.setText("");
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(getIntent());
+            overridePendingTransition(0, 0);
+        }
     }
 
     @Override

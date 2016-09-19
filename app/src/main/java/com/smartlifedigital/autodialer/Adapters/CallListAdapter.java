@@ -302,7 +302,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 
 		return view;
 	}
-	
+
 	private void updateTextColor(TextView view, boolean isOn) {
 		if (isOn) {
 			view.setTextColor(Color.GREEN);
