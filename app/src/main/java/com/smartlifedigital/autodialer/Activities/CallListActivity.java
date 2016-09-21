@@ -146,7 +146,6 @@ public class CallListActivity extends AppCompatActivity {
 
     public void setcallEnabled(long id, boolean isEnabled) {
         CallManagerHelper.cancelcalls(this);
-
         Model model = dbHelper.getcall(id);
         try {
             model.isEnabled = isEnabled;
@@ -154,7 +153,6 @@ public class CallListActivity extends AppCompatActivity {
             System.out.print("Caught Exception!");
         }
         dbHelper.updatecall(model);
-
         CallManagerHelper.setcalls(this);
     }
 

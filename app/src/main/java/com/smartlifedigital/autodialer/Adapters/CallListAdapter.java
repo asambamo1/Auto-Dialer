@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.smartlifedigital.autodialer.Activities.CallDetailsActivity;
 import com.smartlifedigital.autodialer.Activities.CallListActivity;
 import com.smartlifedigital.autodialer.Models.Model;
 import com.smartlifedigital.autodialer.Preferences.AutoDialerSettings;
@@ -64,6 +65,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
         return valueFilter;
     }
 
+	//Filter Constraints
     private class ValueFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -141,52 +143,46 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
+		//Set View
+		if (view == null) {
+			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inflater.inflate(R.layout.call_list_item, parent, false);
+		}
 
+		//Define Model
+		Model model = (Model) getItem(position);
+
+		//Set Color as Green if day is enabled and black if day is disabled
+		updateTextColor((TextView) view.findViewById(R.id.call_item_sunday), model.getRepeatingDay(Model.SUNDAY));
+		updateTextColor((TextView) view.findViewById(R.id.call_item_monday), model.getRepeatingDay(Model.MONDAY));
+		updateTextColor((TextView) view.findViewById(R.id.call_item_tuesday), model.getRepeatingDay(Model.TUESDAY));
+		updateTextColor((TextView) view.findViewById(R.id.call_item_wednesday), model.getRepeatingDay(Model.WEDNESDAY));
+		updateTextColor((TextView) view.findViewById(R.id.call_item_thursday), model.getRepeatingDay(Model.THURSDAY));
+		updateTextColor((TextView) view.findViewById(R.id.call_item_friday), model.getRepeatingDay(Model.FRDIAY));
+		updateTextColor((TextView) view.findViewById(R.id.call_item_saturday), model.getRepeatingDay(Model.SATURDAY));
+		updateTextColor((TextView) view.findViewById(R.id.phone_call_repeat), model.repeatWeekly);
+
+		//Get Shared Preferences for Time format and Number Visibility
 		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
 		StringBuilder Time = new StringBuilder();
 		Time.append(SP.getBoolean("time", true));
 		StringBuilder Number = new StringBuilder();
 		Number.append(SP.getBoolean("number", true));
 
-		if (view == null) {
-			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			view = inflater.inflate(R.layout.call_list_item, parent, false);
-		}
-
-		Model model = (Model) getItem(position);
-
+		//Convert to 12 hour format
 		int hour = model.timeHour;
 		int minutes = model.timeMinute;
-		String timeSet = "";
-		if (hour > 12) {
-			hour -= 12;
-			timeSet = "PM";
-		} else if (hour == 0) {
-			hour += 12;
-			timeSet = "AM";
-		} else if (hour == 12)
-			timeSet = "PM";
-		else
-			timeSet = "AM";
-
-		String min = "";
-		if (minutes < 10)
-			min = "0" + minutes ;
-		else
-			min = String.valueOf(minutes);
-
-		// Append in StringBuilder
-		String aTime = new StringBuilder().append(hour).append(':')
-				.append(min).append(" ").append(timeSet).toString();
 
         TextView txtTime = (TextView) view.findViewById(R.id.call_item_time);
 		if(Time.toString().equals("true")) {
 			txtTime.setText(String.format("%02d:%02d", model.timeHour, model.timeMinute));
 		}
 		else if(Time.toString().equals("false")){
-			txtTime.setText(aTime);
+			boolean isPM = (hour >= 12);
+			txtTime.setText(String.format("%01d:%02d %s", (hour == 12 || hour == 0) ? 12 : hour % 12, minutes, isPM ? "PM" : "AM"));
 		}
 
+		//Set name as "Unnamed Call" if user gives call no name
 		TextView txtName = (TextView) view.findViewById(R.id.call_item_name);
 		txtName.setText(model.name);
 
@@ -195,6 +191,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
             txtName.setText(R.string.no_name);
         }
 
+		//If user hides phone number in settings, hide phone number in list
 		TextView txtNumber = (TextView) view.findViewById(R.id.number);
 		txtNumber.setText(model.phonenumber);
 
@@ -205,34 +202,20 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 			txtNumber.setVisibility(View.VISIBLE);
 		}
 
-        updateTextColor((TextView) view.findViewById(R.id.call_item_sunday), model.getRepeatingDay(Model.SUNDAY));
-		updateTextColor((TextView) view.findViewById(R.id.call_item_monday), model.getRepeatingDay(Model.MONDAY));
-		updateTextColor((TextView) view.findViewById(R.id.call_item_tuesday), model.getRepeatingDay(Model.TUESDAY));
-		updateTextColor((TextView) view.findViewById(R.id.call_item_wednesday), model.getRepeatingDay(Model.WEDNESDAY));
-		updateTextColor((TextView) view.findViewById(R.id.call_item_thursday), model.getRepeatingDay(Model.THURSDAY));
-		updateTextColor((TextView) view.findViewById(R.id.call_item_friday), model.getRepeatingDay(Model.FRDIAY));
-		updateTextColor((TextView) view.findViewById(R.id.call_item_saturday), model.getRepeatingDay(Model.SATURDAY));
-		updateTextColor((TextView) view.findViewById(R.id.phone_call_repeat), model.repeatWeekly);
+		//Toggle to enable and disable the call
+		final ToggleButton btnToggle = (ToggleButton) view.findViewById(R.id.call_item_toggle);
+		btnToggle.setChecked(model.isEnabled);
 
-		ToggleButton btnToggle = (ToggleButton) view.findViewById(R.id.call_item_toggle);
-        try {
-            btnToggle.setChecked(model.isEnabled);
-        }catch (NullPointerException e){
-            System.out.print("Caught Exception!");
-        }
 		btnToggle.setTag(Long.valueOf(model.id));
 		btnToggle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                try {
-                    ((CallListActivity) mContext).setcallEnabled(((Long) buttonView.getTag()).longValue(), isChecked);
-                }catch (NullPointerException e){
-                    System.out.print("Caught Exception!");
-                }
+               ((CallListActivity) mContext).setcallEnabled(((Long) buttonView.getTag()).longValue(), isChecked);
 			}
 		});
 
+		//Call Now Button
 		Button btn = (Button) view.findViewById(R.id.button);
 		final String number = model.phonenumber;
 		btn.setOnClickListener(new OnClickListener() {
@@ -244,6 +227,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 			}
 		});
 
+		//On click go to CallDetailsActivity.class
 		view.setTag(Long.valueOf(model.id));
 		view.setOnClickListener(new OnClickListener() {
 
@@ -253,6 +237,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 			}
 		});
 
+		//On Long Click, Delete Call
 		view.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View view) {
@@ -261,9 +246,11 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 			}
 		});
 
-        // HIGHLIGHT...
+        //HIGHLIGHT SEARCHED TEXT...
         String fullText = model.name;
+		String fullNum= model.phonenumber;
 
+		//Highlight the Name
         if (mSearchText != null && !mSearchText.isEmpty()) {
             int startPos = fullText.toLowerCase(Locale.US).indexOf(mSearchText.toLowerCase(Locale.US));
             int endPos = startPos + mSearchText.length();
@@ -281,8 +268,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
             txtName.setText(fullText);
         }
 
-        String fullNum= model.phonenumber;
-
+		//Highlight the Phone Number
         if (mSearchText != null && !mSearchText.isEmpty()) {
             int startPos = fullNum.toLowerCase(Locale.US).indexOf(mSearchText.toLowerCase(Locale.US));
             int endPos = startPos + mSearchText.length();
