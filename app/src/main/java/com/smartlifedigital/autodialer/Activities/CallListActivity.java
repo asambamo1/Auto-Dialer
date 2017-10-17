@@ -2,14 +2,11 @@ package com.smartlifedigital.autodialer.Activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.BackgroundColorSpan;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +26,6 @@ import com.smartlifedigital.autodialer.Models.Model;
 import com.smartlifedigital.autodialer.R;
 
 import java.sql.Date;
-import java.text.Normalizer;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,6 +47,8 @@ public class CallListActivity extends AppCompatActivity {
     FrameLayout searchBar;
     @Bind(R.id.clear_search)
     com.joanzapata.iconify.widget.IconTextView clear;
+    @Bind(R.id.search_icon)
+    com.joanzapata.iconify.widget.IconTextView searchIcon;
     @Bind(R.id.no_call_found)
     TextView noCallFound;
 
@@ -64,6 +62,21 @@ public class CallListActivity extends AppCompatActivity {
         mAdapter = new CallListAdapter(this, dbHelper.getcalls());
         callsList.setAdapter(mAdapter);
         callsList.setTextFilterEnabled(true);
+
+        //Get Shared Preferences for Search Bar Visibility
+        SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(mContext);
+        StringBuilder Search = new StringBuilder();
+        Search.append(SP.getBoolean("search_bar", true));
+
+        if(Search.toString().equals("false")){
+            search.setVisibility(View.GONE);
+            searchIcon.setVisibility(View.GONE);
+        }
+        else if(Search.toString().equals("true")){
+            search.setVisibility(View.VISIBLE);
+            searchIcon.setVisibility(View.VISIBLE);
+        }
+
     }
 
 
@@ -80,8 +93,13 @@ public class CallListActivity extends AppCompatActivity {
     @Override
     public void onRestart() {
         super.onRestart();
-        finish();
-        startActivity(getIntent());
+        refresh();
+       // if ((search.getText().toString().equals(""))){
+            //refresh();
+        //}
+
+        //finish();
+        //startActivity(getIntent());
     }
 
 
@@ -197,13 +215,10 @@ public class CallListActivity extends AppCompatActivity {
     }
 
     public void refresh(){
-        if (!(search.getText().toString().isEmpty())) {
-            search.setText("");
             finish();
             overridePendingTransition(0, 0);
             startActivity(getIntent());
             overridePendingTransition(0, 0);
-        }
     }
 
     @Override

@@ -38,10 +38,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnTextChanged;
+
 public class CallListAdapter extends BaseAdapter implements Filterable {
 
+	public ToggleButton btnToggle;
 	private Context mContext;
 	private List<Model> mCalls;
+	private CallListActivity cla;
     public String mSearchText;
     List<Model> mCallFilterList;
 	public ArrayList<Model> filterList;
@@ -141,13 +148,44 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 		return 0;
 	}
 
+	/*static class ViewHolder {
+		@Bind(R.id.call_item_name)
+		TextView name;
+		//@Bind(R.id.job_title)
+		//TextView jobTitle;
+
+		public ViewHolder(View view) {
+
+		}
+	}*/
+
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
+
+		/*ViewHolder holder;
+		if (view != null) {
+			holder = (ViewHolder) view.getTag();
+		} else {
+			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inflater.inflate(R.layout.call_list_item, parent, false);
+			ButterKnife.bind(this, view);
+			holder = new ViewHolder(view);
+			view.setTag(holder);
+		}
+
+		try {
+			holder.name.setText("John Doe");
+		}catch (Exception e){
+
+		}*/
+
 		//Set View
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			view = inflater.inflate(R.layout.call_list_item, parent, false);
 		}
+
+		//loadSavedPreferences();
 
 		//Define Model
 		Model model = (Model) getItem(position);
@@ -203,8 +241,15 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 		}
 
 		//Toggle to enable and disable the call
-		final ToggleButton btnToggle = (ToggleButton) view.findViewById(R.id.call_item_toggle);
+		btnToggle = (ToggleButton) view.findViewById(R.id.call_item_toggle);
 		btnToggle.setChecked(model.isEnabled);
+		btnToggle.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
+
 
 		btnToggle.setTag(Long.valueOf(model.id));
 		btnToggle.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -255,6 +300,7 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
             int startPos = fullText.toLowerCase(Locale.US).indexOf(mSearchText.toLowerCase(Locale.US));
             int endPos = startPos + mSearchText.length();
 
+
             if (startPos != -1) {
                 Spannable spannable = new SpannableString(fullText);
                 ColorStateList blueColor = new ColorStateList(new int[][]{new int[]{}}, new int[]{Color.GREEN});
@@ -295,5 +341,26 @@ public class CallListAdapter extends BaseAdapter implements Filterable {
 		} else {
 			view.setTextColor(Color.BLACK);
 		}
+	}
+
+	private void loadSavedPreferences() {
+		SharedPreferences sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(mContext);
+		boolean heatValue = sharedPreferences.getBoolean("Heat_Value", false);
+		if(btnToggle != null) {
+			if (heatValue) {
+				btnToggle.setChecked(true);
+			} else {
+				btnToggle.setChecked(false);
+			}
+		}
+	}
+
+	private void savePreferences(String key, boolean value) {
+		SharedPreferences sharedPreferences = PreferenceManager
+				.getDefaultSharedPreferences(mContext);
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putBoolean(key, value);
+		editor.commit();
 	}
 }

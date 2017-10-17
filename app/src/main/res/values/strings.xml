@@ -49,6 +49,17 @@
     <string name="confirm_delete_message">Would you like to delete this call?</string>
     <string name="title_activity_settings">Settings</string>
 
+	<string name="use_24">Use 24-hour format</string>
+	<string name="show_phone">Show Phone Number in Call List</string>
+	<string name="show_search">Enable Search Bar (Experimental)</string>
+	<string name="reminder_timer">Reminder Timer</string>
+
+	<string name="phone_number_visible">Phone Number Visible</string>
+	<string name="phone_number_hidden">Phone Number Hidden</string>
+	<string name="search_bar_visible">Search Bar Visible</string>
+	<string name="search_bar_hidden">Search Bar Hidden</string>
+
+
     <!-- Strings related to Settings -->
 
 </resources>

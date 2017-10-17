@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference android:title="Use 24-hour format"
+    <SwitchPreference android:title="@string/use_24"
         android:defaultValue="true"
         android:summaryOn="@string/c24"
         android:summaryOff="@string/c12"
         android:key="time" />
 
-    <SwitchPreference android:title="Show Phone Number in Call List"
+    <SwitchPreference android:title="@string/show_phone"
         style="@style/Material.Widget.Switch"
         android:defaultValue="true"
-        android:summaryOn="Phone Number Visible"
-        android:summaryOff="Phone Number Hidden"
+        android:summaryOn="@string/phone_number_visible"
+        android:summaryOff="@string/phone_number_hidden"
         android:key="number" />
 
-    <EditTextPreference android:title="Reminder Timer"
+    <SwitchPreference android:title="@string/show_search"
+        style="@style/Material.Widget.Switch"
+        android:defaultValue="false"
+        android:summaryOn="@string/search_bar_visible"
+        android:summaryOff="@string/search_bar_hidden"
+        android:key="search_bar" />
+
+    <EditTextPreference android:title="@string/reminder_timer"
         android:key="callreminder"
         android:inputType="number"
         android:hint="15"
         android:maxLength="2"
         android:summary="@string/rs"></EditTextPreference>
 
-    <Preference android:title="About"
+    <Preference android:title="@string/about"
         android:key="about"
         android:summary="@string/abt"/>
 
